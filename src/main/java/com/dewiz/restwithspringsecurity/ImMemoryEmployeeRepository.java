@@ -16,8 +16,9 @@ public class ImMemoryEmployeeRepository  {
         DATABASE.add(new Employee(3, "David", "Cameron", "david@gmail.com"));
     }
 
-    public void addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee) {
         DATABASE.add(employee);
+        return employee;
     }
 
     public List<Employee> getAllEmployees() {
