@@ -1,31 +1,31 @@
 package com.dewiz.restwithspringsecurity.service.impl;
 
 import com.dewiz.restwithspringsecurity.model.Employee;
-import com.dewiz.restwithspringsecurity.repository.ImMemoryEmployeeRepository;
+import com.dewiz.restwithspringsecurity.repository.JpaEmployeeRepository;
 import com.dewiz.restwithspringsecurity.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
-public class InMemoryEmployeeServiceImpl implements EmployeeService {
-    private final ImMemoryEmployeeRepository imMemoryEmployeeRepository;
+@RequiredArgsConstructor
+public class JpaEmployeeServiceImpl implements EmployeeService {
+    private final JpaEmployeeRepository jpaEmployeeRepository;
 
     @Override
     public Employee addEmployee(Employee employee) {
-        return imMemoryEmployeeRepository.addEmployee(employee);
+        return jpaEmployeeRepository.save(employee);
     }
 
     @Override
     public List<Employee> getAllEmployees() {
-        return imMemoryEmployeeRepository.getAllEmployees();
+        return jpaEmployeeRepository.findAll();
     }
 
     @Override
     public Employee findById(Integer id) {
-        return imMemoryEmployeeRepository.findById(id);
+        return jpaEmployeeRepository.findById(id).get();
     }
 
     @Override
@@ -35,6 +35,7 @@ public class InMemoryEmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Boolean deleteById(Integer id) {
-        return imMemoryEmployeeRepository.deleteById(id);
+        jpaEmployeeRepository.deleteById(id);
+        return  Boolean.TRUE;
     }
 }

@@ -1,4 +1,4 @@
-package com.dewiz.restwithspringsecurity;
+package com.dewiz.restwithspringsecurity.repository;
 
 import com.dewiz.restwithspringsecurity.model.Employee;
 import org.springframework.stereotype.Repository;
