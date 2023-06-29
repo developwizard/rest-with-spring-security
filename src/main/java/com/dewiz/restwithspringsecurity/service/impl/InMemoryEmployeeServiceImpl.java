@@ -4,12 +4,14 @@ import com.dewiz.restwithspringsecurity.model.Employee;
 import com.dewiz.restwithspringsecurity.repository.ImMemoryEmployeeRepository;
 import com.dewiz.restwithspringsecurity.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
+@Qualifier(value = "inMemoryEmployeeService")
 public class InMemoryEmployeeServiceImpl implements EmployeeService {
     private final ImMemoryEmployeeRepository imMemoryEmployeeRepository;
 

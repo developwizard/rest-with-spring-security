@@ -4,12 +4,14 @@ import com.dewiz.restwithspringsecurity.model.Employee;
 import com.dewiz.restwithspringsecurity.repository.JpaEmployeeRepository;
 import com.dewiz.restwithspringsecurity.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Qualifier(value = "mySQLEmployeeService")
 public class JpaEmployeeServiceImpl implements EmployeeService {
     private final JpaEmployeeRepository jpaEmployeeRepository;
 

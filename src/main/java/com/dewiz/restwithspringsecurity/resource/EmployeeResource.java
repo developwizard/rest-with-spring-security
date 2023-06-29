@@ -2,7 +2,7 @@ package com.dewiz.restwithspringsecurity.resource;
 
 import com.dewiz.restwithspringsecurity.model.Employee;
 import com.dewiz.restwithspringsecurity.service.EmployeeService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -11,10 +11,15 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(path = "/api/employees")
 public class EmployeeResource {
+
+    @Qualifier(value = "mySQLEmployeeService")
     private final EmployeeService employeeService;
+
+    public EmployeeResource(@Qualifier(value = "mySQLEmployeeService") EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Employee>> getEmployees() {
