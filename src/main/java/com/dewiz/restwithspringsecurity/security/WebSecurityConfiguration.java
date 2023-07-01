@@ -15,17 +15,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
+    private final AccountAuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(null);
+        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authorizeHttpRequests) ->
-                authorizeHttpRequests
-                        .requestMatchers(HttpMethod.POST, "/api/accounts/**").permitAll()
-                        .anyRequest().hasAnyRole("USER", "ADMIN")
-        ).httpBasic(Customizer.withDefaults())
+                        authorizeHttpRequests
+                                .requestMatchers(HttpMethod.POST, "/api/accounts/**").permitAll()
+                                .anyRequest().hasAnyRole("USER", "ADMIN")
+                ).httpBasic(Customizer.withDefaults())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();

@@ -1,4 +1,4 @@
-package com.dewiz.restwithspringsecurity.service;
+package com.dewiz.restwithspringsecurity.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
