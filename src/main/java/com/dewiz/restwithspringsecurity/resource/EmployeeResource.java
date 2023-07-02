@@ -33,7 +33,7 @@ public class EmployeeResource {
 
     @PostMapping
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
-        employee.setId(employeeService.getAllEmployees().size() + 1);
+//        employee.setId(employeeService.getAllEmployees().size() + 1);
         return ResponseEntity.created(getLocation(employee.getId())).body(employeeService.addEmployee(employee));
     }
 
@@ -48,7 +48,12 @@ public class EmployeeResource {
     }
 
 
-    private URI getLocation(Integer id) {
+    /**
+     * Return location for use in the controller ResponseEntity.created
+     *
+     * @param id
+     */
+    protected static URI getLocation(Integer id) {
         return ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(id).toUri();
     }
 }
