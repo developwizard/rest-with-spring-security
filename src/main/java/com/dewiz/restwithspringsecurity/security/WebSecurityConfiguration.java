@@ -24,8 +24,12 @@ public class WebSecurityConfiguration {
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
-                                .requestMatchers(HttpMethod.POST, "/api/accounts/**").permitAll()
-                                .anyRequest().hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/accounts/**")
+                                .permitAll()
+                                .requestMatchers( "/**")
+                                .authenticated()
+                                .anyRequest()
+                                .hasAnyRole("USER", "ADMIN")
                 ).httpBasic(Customizer.withDefaults())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
