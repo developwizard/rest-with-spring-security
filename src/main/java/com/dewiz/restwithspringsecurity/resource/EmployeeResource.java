@@ -4,6 +4,7 @@ import com.dewiz.restwithspringsecurity.model.Employee;
 import com.dewiz.restwithspringsecurity.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,6 +32,7 @@ public class EmployeeResource {
         return ResponseEntity.ok(employeeService.findById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
 //        employee.setId(employeeService.getAllEmployees().size() + 1);
