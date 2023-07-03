@@ -2,6 +2,7 @@ package com.dewiz.restwithspringsecurity.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,10 @@ public class Account {
     @GeneratedValue
     private Long id;
     @Column(unique = true)
+    @NotNull
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
     private String password;
     private boolean enabled = true;
     private boolean credentrialsexpired = false;
